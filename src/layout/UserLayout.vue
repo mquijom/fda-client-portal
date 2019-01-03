@@ -4,51 +4,88 @@
       <v-toolbar dark style='height: 100px; background: linear-gradient(45deg, #43A047 0%, #1de9b6 100%)'>
         <v-list class="pa-0">
           <v-list-tile  class="pa-1" avatar style=" height: 100px; background:url('https://pixinvent.com/free-materialize-material-design-admin-template/images/gallary/7.png') no-repeat center center">
-            <v-list-tile-avatar>
+            <v-list-tile-avatar class="mt-4" >
               <img src="http://i.pravatar.cc/300">
             </v-list-tile-avatar>
             <v-spacer></v-spacer>
-            <v-list-tile-content>
-              <v-list-tile-title >John Leider</v-list-tile-title>
-              <v-list-tile-sub-title>Administrator</v-list-tile-sub-title>
+            <v-list-tile-content class="mt-4">
+              <v-list-tile-title class="body-2">abalita</v-list-tile-title>
+              <v-list-tile-sub-title class="caption">Last Logged in:</v-list-tile-sub-title>
+              <v-list-tile-sub-title class="caption">01/02/2019 2:19PM</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
       </v-toolbar>
       <v-list>
-        <v-list-tile @click="" class="ma-1">
+        <v-list-tile @click="goTo('/app')" class="ma-1" :style="activeRoute('Dashboard')">
           <v-list-tile-action>
             <v-icon color="success">dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="subheading font-weight-light">Dashboard</v-list-tile-title>
+            <v-list-tile-title class="body-1 font-weight-light">Dashboard</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile class="ma-1">
+        <v-list-tile  @click="goTo('/app/licenses')" class="ma-1" :style="activeRoute('Licenses')">
           <v-list-tile-action>
             <v-icon color="success">card_membership</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="subheading font-weight-light">Licenses</v-list-tile-title>
+            <v-list-tile-title class="body-1 font-weight-light">Licenses</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile class="ma-1">
+        <v-list-tile  @click="goTo('/app/certificates')" class="ma-1" :style="activeRoute('Certificates')">
           <v-list-tile-action>
             <v-icon color="success">book</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="subheading font-weight-light">Certificates</v-list-tile-title>
+            <v-list-tile-title class="body-1 font-weight-light">Certificates</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile class="ma-1">
+        <v-list-tile  @click="goTo('/app/payments')" class="ma-1" :style="activeRoute('Payments')">
           <v-list-tile-action>
             <v-icon color="success">far fa-credit-card</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="subheading font-weight-light">Payments</v-list-tile-title>
+            <v-list-tile-title class="body-1 font-weight-light">Payments</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        
+        <v-list-tile  @click="goTo('/app/payments')" class="ma-1" :style="activeRoute('Notifications')">
+          <v-list-tile-action>
+            <v-icon color="success">notifications</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="body-1 font-weight-light">Notifications</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider></v-divider>
+
+        <v-list-tile  @click="goTo('/app/payments')" class="ma-1" :style="activeRoute('Notifications')">
+          <v-list-tile-action>
+            <v-icon color="success">far fa-user-circle</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="body-1 font-weight-light">My Profile</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile  @click="goTo('/app/payments')" class="ma-1" :style="activeRoute('Notifications')">
+          <v-list-tile-action>
+            <v-icon color="success">lock_open</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="body-1 font-weight-light">Password Settings</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+         <v-list-tile  @click="goTo('/app/payments')" class="ma-1" :style="activeRoute('Notifications')">
+          <v-list-tile-action>
+            <v-icon color="success">fas fa-sign-out-alt</v-icon>            
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="body-1 font-weight-light">Logout</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
   <v-toolbar app dark
@@ -57,7 +94,7 @@
       <v-icon v-if='mini'>menu</v-icon>
       <v-icon v-else>chevron_left</v-icon>
     </v-btn>
-    <span class="title font-weight-light">FDA Client Portal</span>
+    <span class="headline font-weight-light">FDA Client Portal</span>
     <v-spacer></v-spacer>
     <v-btn icon >
       <v-icon small> far fa-bell</v-icon>
@@ -72,14 +109,30 @@
     </v-btn>
     
   </v-toolbar>
-  <v-content>
+  <!-- <v-content> -->
     <v-container fluid>
+      <span class="headline font-weight-thin">{{page_name}}</span>
+      <v-breadcrumbs divider="/">
+       <v-breadcrumbs-item>
+         <v-icon color="primary">home</v-icon><span class="caption font-weight-light">Home</span>
+       </v-breadcrumbs-item> 
+       <v-breadcrumbs-item>
+         <v-icon>book</v-icon><span class="caption font-weight-light">Certficates</span>
+       </v-breadcrumbs-item>
+       <v-breadcrumbs-item>
+         <v-icon>edit</v-icon><span class="caption font-weight-light">New Application</span>
+       </v-breadcrumbs-item>  
+      </v-breadcrumbs>
+      <v-divider></v-divider>
+      <!-- <transition name="fade"> -->
       <router-view></router-view>
+      <!-- </transition> -->
     </v-container>
-  </v-content>
+  <!-- </v-content> -->
   <v-footer app  dark class="pa-1" style='background: linear-gradient(45deg, #43A047 0%, #1de9b6 100%)'>
+    <span class="caption">Copyright © 2019 FDA All rights reserved.</span>
     <v-spacer></v-spacer>
-    <span class="caption">2019</span>
+    <span class="caption">Food And Drugs Administration of the Philippines</span>
   </v-footer>
 </v-app>
 </template>
@@ -91,27 +144,62 @@ export default {
   //#########################
   data(){
     return{
-      mini:false
+      mini:false,
+      route_name:''
     }
   },
   //#########################
   // init
   //#########################
-  created(){
+  created(){    
 
   },
   //#########################
   // methods
   //#########################
   methods:{
+    goTo(router){
+      this.$router.push(router)
+    },
+    activeRoute(route){
+      console.log("ROUTER_NAME: " + this.$route.name)
+      if(this.$route.name ===route){
+        return "background-color: rgb(2, 128, 0); color:white"
+      }else{
+        return
+      }
+      
+    }
 
-  }
+  },
   //#########################
   // computed
   //#########################
+  computed:{
+    page_name(){
+      return this.$route.name
+    }
+  }
 
 }
 </script>
 
 <style>
+#nprogress .bar {
+  height:2px;
+}
+
+#container {
+  padding:40px;
+  background-color:grey;
+  color:white;
+}
+#nprogress .bar {
+  background: purple;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: purple;
+  border-left-color: purple;
+}
 </style>

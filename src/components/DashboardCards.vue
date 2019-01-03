@@ -1,6 +1,6 @@
 <template>
-    <v-layout row wrap>
-  <v-flex xs12 sm12 md6 lg3 pa-3>
+    <!-- <v-layout row wrap>
+  <v-flex xs12 sm12 md6 lg3> -->
     <v-card dark :style="style">
     <v-card-title primary-title>
       <v-avatar
@@ -10,7 +10,7 @@
        <v-icon >{{icon}}</v-icon>       
       </v-avatar>
       <v-spacer></v-spacer>
-      <h3 class="headline font-weight-light">{{title}}</h3>
+      <h3 class="title font-weight-light">{{title}}</h3>
       
     </v-card-title>
     <v-card-text>
@@ -27,8 +27,8 @@
       
     </v-card-text>
   </v-card>
-  </v-flex>
-</v-layout>
+  <!-- </v-flex>
+</v-layout> -->
 </template>
 
 <script>
