@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <v-navigation-drawer app :mini-variant="mini" width="250">
+    <v-navigation-drawer app :mini-variant="mini || $vuetify.breakpoint.mdAndDown" width="250">
       <v-toolbar dark style='height: 100px; background: linear-gradient(45deg, #43A047 0%, #1de9b6 100%)'>
         <v-list class="pa-0">
           <v-list-tile  class="pa-1" avatar style=" height: 100px; background:url('https://pixinvent.com/free-materialize-material-design-admin-template/images/gallary/7.png') no-repeat center center">
@@ -112,17 +112,13 @@
   <!-- <v-content> -->
     <v-container fluid>
       <span class="headline font-weight-thin">{{page_name}}</span>
-      <v-breadcrumbs divider="/">
-       <v-breadcrumbs-item>
-         <v-icon color="primary">home</v-icon><span class="caption font-weight-light">Home</span>
+      <v-breadcrumbs divider="/" >
+       <v-breadcrumbs-item v-for="item in breadcrumbs" :key="item" @click="goTo('/app')">
+         
+         <v-icon color="primary">{{item.icon}}</v-icon><span class="caption font-weight-light">{{item.name}}</span>
+         
        </v-breadcrumbs-item> 
-       <v-breadcrumbs-item>
-         <v-icon>book</v-icon><span class="caption font-weight-light">Certficates</span>
-       </v-breadcrumbs-item>
-       <v-breadcrumbs-item>
-         <v-icon>edit</v-icon><span class="caption font-weight-light">New Application</span>
-       </v-breadcrumbs-item>  
-      </v-breadcrumbs>
+      </v-breadcrumbs>      
       <v-divider></v-divider>
       <!-- <transition name="fade"> -->
       <router-view></router-view>
@@ -178,6 +174,21 @@ export default {
   computed:{
     page_name(){
       return this.$route.name
+    },
+    breadcrumbs(){
+      return [
+        { icon:'home',
+          name: 'Dashboard',
+          disabled: false,
+          href: 'breadcrumbs_dashboard'
+        },
+        { icon:'book',
+          name: 'Certificates',
+          disabled: false,
+          href: 'breadcrumbs_dashboard'
+        },
+        
+        ]
     }
   }
 
@@ -185,21 +196,5 @@ export default {
 </script>
 
 <style>
-#nprogress .bar {
-  height:2px;
-}
 
-#container {
-  padding:40px;
-  background-color:grey;
-  color:white;
-}
-#nprogress .bar {
-  background: purple;
-}
-
-#nprogress .spinner-icon {
-  border-top-color: purple;
-  border-left-color: purple;
-}
 </style>

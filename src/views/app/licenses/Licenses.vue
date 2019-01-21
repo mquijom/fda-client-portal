@@ -19,12 +19,26 @@
                     class="elevation-1"
                 >
                     <template slot="items" slot-scope="props">
-                    <td>{{ props.item.name }}</td>
-                    <td class="text-xs-right">{{ props.item.calories }}</td>
-                    <td class="text-xs-right">{{ props.item.fat }}</td>
-                    <td class="text-xs-right">{{ props.item.carbs }}</td>
-                    <td class="text-xs-right">{{ props.item.protein }}</td>
-                    <td class="text-xs-right">{{ props.item.iron }}</td>
+                    <td>{{ props.item.case_no }}</td>
+                    <td>{{ props.item.case_no }}</td>
+                    <td>{{ props.item.application_type }}</td>
+                    <td>{{ props.item.current_task }}</td>
+                    <td>{{ props.item.date_created }}</td>
+                    <td>{{ props.item.date_variation }}</td>
+                    <td>
+                        <v-layout row wrap>
+                            <v-flex xs6>
+                                <v-btn flat icon color="primary">
+                                    <v-icon small>edit</v-icon>
+                                </v-btn>
+                            </v-flex>
+                            <v-flex xs6>
+                                <v-btn flat icon color="primary">
+                                    <v-icon small>search</v-icon>
+                                </v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </td>
                     </template>
                 </v-data-table>
            </v-card>
@@ -38,22 +52,28 @@
     data () {
       return {
         headers: [
-          { text: 'Case No', value: 'name'},
-          { text: 'License No', value: 'calories' },
-          { text: 'Type', value: 'fat' },
-          { text: 'Task', value: 'carbs' },
-          { text: 'Application Date', value: 'protein' },
-          { text: 'Variation Date', value: 'iron' }
+          { text: 'Case No', value: 'case_no'},
+          { text: 'License No', value: 'case_no' },
+          { text: 'Type', value: 'application_type' },
+          { text: 'Task', value: 'current_task' },
+          { text: 'Application Date', value: 'date_created' },
+          { text: 'Variation Date', value: 'date_variation' },
+          { text: 'Actions', value: '' }
         ],
         licenses: []
       }
     },
     created(){
-
+        this.init()
     },
     methods:{
         init(){
-            // this.
+            this.$http.get("https://fda-services.herokuapp.com/v1.0/lto-api/").then(result => {
+                if (result.data.success) {
+                this.licenses = result.data.model;
+                console.log(JSON.stringify(this.licenses));
+                }
+            });
         },
         apply(){
             this.$router.push('/app/licenses/apply')
