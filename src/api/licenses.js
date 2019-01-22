@@ -20,7 +20,7 @@ export default class LicenseAPI{
             if (result.data.success) {
                 cb(result.data.model)
             } else {
-                cb()
+                cb(result.data.errors)
             }
         });
     }
