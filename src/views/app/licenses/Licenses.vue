@@ -15,7 +15,7 @@
                 </v-btn>
                 <v-data-table
                     :headers="headers"
-                    :items="licenses"
+                    :items="$store.state.licenses.licenses"
                     class="elevation-1"
                 >
                     <template slot="items" slot-scope="props">
@@ -68,12 +68,7 @@
     },
     methods:{
         init(){
-            this.$http.get("https://fda-services.herokuapp.com/v1.0/lto-api/").then(result => {
-                if (result.data.success) {
-                this.licenses = result.data.model;
-                console.log(JSON.stringify(this.licenses));
-                }
-            });
+            this.$store.dispatch('SET_LICENSES');
         },
         apply(){
             this.$router.push('/app/licenses/apply')

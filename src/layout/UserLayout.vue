@@ -113,7 +113,7 @@
     <v-container fluid>
       <span class="headline font-weight-thin">{{page_name}}</span>
       <v-breadcrumbs divider="/" >
-       <v-breadcrumbs-item v-for="item in breadcrumbs" :key="item" @click="goTo('/app')">
+       <v-breadcrumbs-item v-for="(item, index) in breadcrumbs" :key="index" @click="goTo('/app')">
          
          <v-icon color="primary">{{item.icon}}</v-icon><span class="caption font-weight-light">{{item.name}}</span>
          

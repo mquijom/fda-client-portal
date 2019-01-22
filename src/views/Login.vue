@@ -39,6 +39,7 @@
 export default {
     methods:{
         login(){
+            this.$store.commit('API_INSTANCE', 'my_sample_api_token')
             this.$router.push('/app')
         }
     }
